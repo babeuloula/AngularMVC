@@ -1,0 +1,15 @@
+<a href="#/">Retour</a>
+
+<div ng-if="article.comments.length == 1">
+    <h1>Commentaire de l'article {{ article.title }}</h1>
+</div>
+<div ng-if="article.comments.length > 1">
+    <h1>Commentaires de l'article {{ article.title }}</h1>
+</div>
+
+<div ng-repeat="comment in article.comments">
+    <p>
+        <strong>{{ comment.username }}</strong><br>
+        {{ comment.content }}
+    </p>
+</div>

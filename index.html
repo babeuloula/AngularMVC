@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+
+<html lang="fr" ng-app="angularMVC">
+
+    <head>
+
+        <title>Angular MVC</title>
+
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+        <link title="defaut" type="text/css" rel="stylesheet" href="css/style.css" media="screen">
+
+        <META CHARSET="UTF-8">
+        <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="FR">
+
+    </head>
+
+    <body>
+
+        <div ng-show="loading">Chargement ...</div>
+
+        <div ng-hide="loading">
+            <div ng-view></div>
+        </div>
+
+        <!-- Libs -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+        <script type="text/javascript" src="https://code.angularjs.org/1.4.3/angular-route.min.js"></script>
+
+
+        <!-- Rooter -->
+        <script type="text/javascript" src="rooter/rooter.js"></script>
+
+
+        <!-- Controllers -->
+        <script type="text/javascript" src="controllers/ErrorController.js"></script>
+        <script type="text/javascript" src="controllers/ArticleController.js"></script>
+        <script type="text/javascript" src="controllers/CommentController.js"></script>
+
+
+        <!-- Factories -->
+        <script type="text/javascript" src="factories/Factory.js"></script>
+        <script type="text/javascript" src="factories/ArticleFactory.js"></script>
+
+
+        <!-- Application -->
+        <script type="text/javascript">
+            /**
+             * Démarrage du module Angular
+             **/
+            var app = angular.module('angularMVC', [
+                'ngRoute'
+            ]);
+
+
+            /**
+             * Permet d'éviter les liens avec des unsafe
+             **/
+            app.config(['$compileProvider', function($compileProvider) {
+                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+            }]);
+
+
+            /**
+             * Création des routes
+             **/
+            var rooter = new Rooter(app);
+
+
+            /**
+             * Inscription des controllers à Angular
+             **/
+            // Erreurs
+            app.controller('err404Action', ['$rootScope', '$scope', ErrorController.err404.action]);
+
+
+            // Articles
+            app.controller('articlesAction', ['$rootScope', '$scope', 'ArticleFactory', ArticleController.articles.action]);
+
+
+            // Commentaires
+            app.controller('commentsAction', ['$rootScope', '$scope', 'ArticleFactory', '$routeParams', CommentController.comments.action]);
+
+
+            /**
+             * Intégration des factories à Angular
+             **/
+            // Article
+            app.factory('ArticleFactory', ['$http', '$q', ArticleFactory.factory]);
+        </script>
+
+    </body>
+
+</html>
