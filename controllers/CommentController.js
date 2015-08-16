@@ -2,6 +2,9 @@ var CommentController = {
     comments: {
         templateUrl: 'views/Comment/comments.html',
         controller: 'commentsAction',
+        route: {
+            url: '/comments/:id/'
+        },
         action: function($rootScope, $scope, ArticleFactory, $routeParams) {
             $rootScope.loading = true;
 

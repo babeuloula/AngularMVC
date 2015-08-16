@@ -28,6 +28,9 @@ Vous avez simplement à créer un fichier, par exemple, *BlogController.js* dans
 	    blog: { // Nom de l'action
 	        templateUrl: 'views/Blog/blog.html', // Emplacement de la vue
 	        controller: 'BlogController', // Le nom du controller à appeler
+            route: { // Informations sur la route
+                url: '/blog/' // URL de la route 
+            },
 	        action: function ($rootScope, $scope) { // Son action
 	            // Ma super action à effectuer
 	        }
@@ -104,7 +107,7 @@ Créez un fichier, par exemple, *BlogFactory.js* dans le dossier *factories* et 
 Ouvrez le fichier *rooter/rooter.js* et ajoutez des routes à la suite des autres *when* comme ceci :
 
 ```
-    .when('/blog/', BlogController.blog)
+    .when(BlogController.blog.route.url, BlogController.blog)
 ```
 
 #Compilation

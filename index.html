@@ -27,10 +27,6 @@
         <script type="text/javascript" src="https://code.angularjs.org/1.4.3/angular-route.min.js"></script>
 
 
-        <!-- Rooter -->
-        <script type="text/javascript" src="rooter/rooter.js"></script>
-
-
         <!-- Controllers -->
         <script type="text/javascript" src="controllers/ErrorController.js"></script>
         <script type="text/javascript" src="controllers/ArticleController.js"></script>
@@ -40,6 +36,10 @@
         <!-- Factories -->
         <script type="text/javascript" src="factories/Factory.js"></script>
         <script type="text/javascript" src="factories/ArticleFactory.js"></script>
+
+
+        <!-- Rooter -->
+        <script type="text/javascript" src="rooter/rooter.js"></script>
 
 
         <!-- Application -->
@@ -67,7 +67,7 @@
 
 
             /**
-             * Inscription des controllers à Angular
+             * Intégration des controllers à Angular
              **/
             // Erreurs
             app.controller('err404Action', ['$rootScope', '$scope', ErrorController.err404.action]);

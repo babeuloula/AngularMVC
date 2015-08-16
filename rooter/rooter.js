@@ -5,13 +5,13 @@ var Rooter = function(app) {
             /**
              * Articles
              **/
-            .when('/', ArticleController.articles)
+            .when(ArticleController.articles.route.url, ArticleController.articles)
 
 
             /**
              * Comments
              **/
-            .when('/comments/:id/', CommentController.comments)
+            .when(CommentController.comments.route.url, CommentController.comments)
 
 
             /**

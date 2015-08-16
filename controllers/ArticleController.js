@@ -2,6 +2,9 @@ var ArticleController = {
     articles: {
         templateUrl: 'views/Article/articles.html',
         controller: 'articlesAction',
+        route: {
+            url: '/'
+        },
         action: function ($rootScope, $scope, ArticleFactory) {
             $rootScope.loading = true;
 
