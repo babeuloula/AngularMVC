@@ -26,23 +26,17 @@ Vous avez simplement à créer un fichier, par exemple, *BlogController.js* dans
 ```
     var BlogController = {
 	    blog: { // Nom de l'action
+	        url: '/blog/' // URL de la route
+	        routeName: 'blog', // Nom de la route
 	        templateUrl: 'views/Blog/blog.html', // Emplacement de la vue
-	        controller: 'BlogController', // Le nom du controller à appeler
-            route: { // Informations sur la route
-                url: '/blog/' // URL de la route 
-            },
-	        action: function ($rootScope, $scope) { // Son action
+	        controller: function ($rootScope, $scope) { // Son action
 	            // Ma super action à effectuer
 	        }
 	    }
 	};
 ```
 
- N'oubliez pas de l'inscrire à AngularJS dans le fichier *index.html* :
- 
-```
-    app.controller('blogAction', ['$rootScope', '$scope', BlogController.blog.action]);
-```
+Plus besoin d'inscrire le controller à AngularJS dans le fichier *index.html*, car angular-ui le gère
 
 ### Création d'une factory
 
@@ -107,11 +101,24 @@ Créez un fichier, par exemple, *BlogFactory.js* dans le dossier *factories* et 
 Ouvrez le fichier *rooter/rooter.js* et ajoutez des routes à la suite des autres *when* comme ceci :
 
 ```
-    .when(BlogController.blog.route.url, BlogController.blog)
+    .state(BlogController.blog.routeName, BlogController.blog)
 ```
 
-#Compilation
+Pour la gestion de route, vous n'avez plus besoin de vous souvenir des URL, vous appelez juste le nom que vous avez indiqué dans *routeName* :
+ 
+```
+    <a ui-sref="blog">Lire mon blog</a>
+```
+
+Pour les routes avec des paramètres, regardez la vue *Article/articles.html*.
+
+# Compilation
 
 Normalement, j'ai essayé d'utiliser au maximum la syntaxe décrite dans la [documentation](https://docs.angularjs.org/api) d'AngularJS permettant une compilation des fichiers JS sans risquer de problème.
 
 Amusez-vous bien avec et en cas de soucis, contactez-moi !
+
+# Changelog
+
+* Modification du système de route.
+    * *angularjs/ngRoute* vers *angular-ui/ui.router*

@@ -1,22 +1,18 @@
 var Rooter = function(app) {
-    app.config(['$routeProvider', function($routeProvider) {
-        $routeProvider
-
+    app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+        $stateProvider
             /**
              * Articles
-             **/
-            .when(ArticleController.articles.route.url, ArticleController.articles)
+             */
+            .state(ArticleController.articles.routeName, ArticleController.articles)
 
 
             /**
              * Comments
-             **/
-            .when(CommentController.comments.route.url, CommentController.comments)
+             */
+            .state(CommentController.comments.routeName, CommentController.comments);
 
 
-            /**
-             * Page 404
-             **/
-            .otherwise(ErrorController.err404);
+        $urlRouterProvider.otherwise('/');
     }]);
 };

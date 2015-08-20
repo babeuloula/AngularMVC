@@ -19,16 +19,15 @@
         <div ng-show="loading">Chargement ...</div>
 
         <div ng-hide="loading">
-            <div ng-view></div>
+            <div ui-view></div>
         </div>
 
         <!-- Libs -->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-        <script type="text/javascript" src="https://code.angularjs.org/1.4.3/angular-route.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 
 
         <!-- Controllers -->
-        <script type="text/javascript" src="controllers/ErrorController.js"></script>
         <script type="text/javascript" src="controllers/ArticleController.js"></script>
         <script type="text/javascript" src="controllers/CommentController.js"></script>
 
@@ -48,7 +47,7 @@
              * Démarrage du module Angular
              **/
             var app = angular.module('angularMVC', [
-                'ngRoute'
+                'ui.router'
             ]);
 
 
@@ -56,7 +55,7 @@
              * Permet d'éviter les liens avec des unsafe
              **/
             app.config(['$compileProvider', function($compileProvider) {
-                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|app):/);
             }]);
 
 
@@ -64,21 +63,6 @@
              * Création des routes
              **/
             var rooter = new Rooter(app);
-
-
-            /**
-             * Intégration des controllers à Angular
-             **/
-            // Erreurs
-            app.controller('err404Action', ['$rootScope', '$scope', ErrorController.err404.action]);
-
-
-            // Articles
-            app.controller('articlesAction', ['$rootScope', '$scope', 'ArticleFactory', ArticleController.articles.action]);
-
-
-            // Commentaires
-            app.controller('commentsAction', ['$rootScope', '$scope', 'ArticleFactory', '$routeParams', CommentController.comments.action]);
 
 
             /**

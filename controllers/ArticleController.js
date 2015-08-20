@@ -1,11 +1,9 @@
 var ArticleController = {
     articles: {
+        url: '/',
+        routeName: 'articles',
         templateUrl: 'views/Article/articles.html',
-        controller: 'articlesAction',
-        route: {
-            url: '/'
-        },
-        action: function ($rootScope, $scope, ArticleFactory) {
+        controller: function ($rootScope, $scope, ArticleFactory) {
             $rootScope.loading = true;
 
             ArticleFactory.findAll().then(function(articles) {

@@ -6,12 +6,12 @@
     <div ng-if="article.comments.length == 1">
         <h2>{{ article.comments.length }} commentaire</h2>
 
-        <a href="#/comments/{{ article.id }}/">Voir le commentaire</a>
+        <a ui-sref="comments({ id: article.id })">Voir le commentaire</a>
     </div>
     <div ng-if="article.comments.length > 1">
         <h2>{{ article.comments.length }} commentaires</h2>
 
-        <a href="#/comments/{{ article.id }}/">Voir les commentaires</a>
+        <a ui-sref="comments({ id: article.id })">Voir les commentaires</a>
     </div>
 
     <hr>
