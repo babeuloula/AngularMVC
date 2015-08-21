@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>AngularMVC by babeuloula</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>AngularMVC</h1>
+        <h2>AngularMVC et un bootstrap qui vous permettra de commencer rapidement des applications avec AngularJS</h2>
+        <a href="https://github.com/babeuloula/AngularMVC" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="angularmvc" class="anchor" href="#angularmvc" aria-hidden="true"><span class="octicon octicon-link"></span></a>AngularMVC</h1>
+
+<p>AngularMVC et un bootstrap qui vous permettra de commencer rapidement des applications avec <a href="https://angularjs.org/">AngularJS</a>.
+Totalement opensource et gratuit, vous êtes libre de faire des modifications et de le distribuer mais rappelez quand même qui est son auteur de base (<a href="http://www.babeuloula.fr/">moi</a>).
+Je ne dit pas que c'est <strong>THE</strong> bootstrap, mais c'est du moins le cas pour moi car il me permet d'aller plus vite.</p>
+
+<h1>
+<a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture</h1>
+
+<p>Ce bootstrap se compose de divers dossiers et fichiers afin de séparer le code de la meilleur façon qu'il soit (celon moi).</p>
+
+<h2>
+<a id="dossiers-et-fichiers" class="anchor" href="#dossiers-et-fichiers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dossiers et fichiers</h2>
+
+<ul>
+<li>
+<strong>controllers</strong> : Dossier contenant les controllers</li>
+<li>
+<strong>css</strong> : Dossier contenant vos styles css</li>
+<li>
+<strong>databases</strong> : Dossier contenant les bases de données json</li>
+<li>
+<strong>factories</strong> : Dossier contenant les factories (y compris le factory de base sous forme d'une class Javascript)</li>
+<li>
+<strong>js</strong> : Dossier contenant vos scripts Javascript</li>
+<li>
+<strong>rooter</strong> : Dossier contenant le gestionnaire de routes</li>
+<li>
+<strong>views</strong> : Dossier contenant les vues de votre applications</li>
+<li>
+<strong>index.html</strong> : Cœur de l'application, <del>la cuisine</del>,  là où vous allez chargez vos tous vos fichiers (controllers, factory, css, js ...) et c'est là aussi où vous allez faire inscrire vos controllers et factories à AngularJS.</li>
+</ul>
+
+<h3>
+<a id="création-dun-controller" class="anchor" href="#cr%C3%A9ation-dun-controller" aria-hidden="true"><span class="octicon octicon-link"></span></a>Création d'un controller</h3>
+
+<p>Vous avez simplement à créer un fichier, par exemple, <em>BlogController.js</em> dans le dossier <em>controllers</em> et le structurer comme ceci :</p>
+
+<div class="highlight highlight-javascript"><pre>    <span class="pl-k">var</span> BlogController <span class="pl-k">=</span> {
+        blog<span class="pl-k">:</span> { <span class="pl-c">// Nom de l'action</span>
+            url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>/blog/<span class="pl-pds">'</span></span> <span class="pl-c">// URL de la route</span>
+            routeName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>blog<span class="pl-pds">'</span></span>, <span class="pl-c">// Nom de la route</span>
+            templateUrl<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>views/Blog/blog.html<span class="pl-pds">'</span></span>, <span class="pl-c">// Emplacement de la vue</span>
+            <span class="pl-en">controller</span><span class="pl-k">:</span> <span class="pl-k">function</span> (<span class="pl-smi">$rootScope</span>, <span class="pl-smi">$scope</span>) { <span class="pl-c">// Son action</span>
+                <span class="pl-c">// Ma super action à effectuer</span>
+            }
+        }
+    };</pre></div>
+
+<p>Plus besoin d'inscrire le controller à AngularJS dans le fichier <em>index.html</em>, car angular-ui le gère</p>
+
+<h3>
+<a id="création-dune-factory" class="anchor" href="#cr%C3%A9ation-dune-factory" aria-hidden="true"><span class="octicon octicon-link"></span></a>Création d'une factory</h3>
+
+<p>Créez un fichier, par exemple, <em>BlogFactory.js</em> dans le dossier <em>factories</em> et structurez le comme ceci : </p>
+
+<div class="highlight highlight-javascript"><pre>    <span class="pl-k">var</span> BlogFactory<span class="pl-k">=</span> {
+        <span class="pl-en">factory</span><span class="pl-k">:</span> <span class="pl-k">function</span>(<span class="pl-smi">$http</span>, <span class="pl-smi">$q</span>) {
+            <span class="pl-k">var</span> factory <span class="pl-k">=</span> {
+                blog<span class="pl-k">:</span> <span class="pl-c1">false</span>, <span class="pl-c">// Permet d'avoir un système de cache et de ne pas lancer une requête AJAX à chaque fois</span>
+
+                <span class="pl-en">connection</span><span class="pl-k">:</span> <span class="pl-k">function</span>() { <span class="pl-c">// Fonction de connexion</span>
+                    <span class="pl-k">var</span> deferred <span class="pl-k">=</span> $q.<span class="pl-c1">defer</span>();
+
+                    <span class="pl-k">if</span>(factory.<span class="pl-c1">articles</span>) {
+                        deferred.<span class="pl-c1">resolve</span>(factory.<span class="pl-c1">articles</span>);
+                    } <span class="pl-k">else</span> {
+                        <span class="pl-k">var</span> db <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Factory</span>(<span class="pl-s"><span class="pl-pds">'</span>article.json<span class="pl-pds">'</span></span>); <span class="pl-c">// Nom du fichier à aller chercher</span>
+
+                        db.<span class="pl-c1">connect</span>($http, $q).<span class="pl-c1">then</span>(<span class="pl-k">function</span> (<span class="pl-smi">response</span>) {
+                            <span class="pl-k">if</span>(response.<span class="pl-c1">ack</span> <span class="pl-k">&amp;&amp;</span> response.<span class="pl-c1">statut</span> <span class="pl-k">===</span> <span class="pl-c1">200</span>) {
+                                factory.<span class="pl-c1">blog</span><span class="pl-k">=</span> response.<span class="pl-c1">datas</span>;
+                                deferred.<span class="pl-c1">resolve</span>(factory.<span class="pl-c1">blog</span>);
+                            } <span class="pl-k">else</span> {
+                                <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">"</span>Erreur lors de la connextion à la base du blog<span class="pl-pds">"</span></span>); <span class="pl-c">// Votre message d'erreur perso</span>
+                            }
+                        }, <span class="pl-k">function</span>(<span class="pl-smi">error</span>) {
+                            <span class="pl-en">console</span><span class="pl-c1">.log</span>(error);
+                        });
+                    }
+
+                    <span class="pl-k">return</span> deferred.<span class="pl-c1">promise</span>;
+                },
+
+                <span class="pl-c">// Vos fonctions qui vous permettrons de récupérer vos données</span>
+                <span class="pl-en">findAll</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+                    <span class="pl-k">var</span> deferred <span class="pl-k">=</span> $q.<span class="pl-c1">defer</span>();
+
+                    factory.<span class="pl-c1">connection</span>().<span class="pl-c1">then</span>(<span class="pl-k">function</span>(<span class="pl-smi">datas</span>) {
+                        deferred.<span class="pl-c1">resolve</span>(datas);
+                    }, <span class="pl-k">function</span>(<span class="pl-smi">error</span>) {
+                        <span class="pl-en">console</span><span class="pl-c1">.log</span>(error);
+                    });
+
+                    <span class="pl-k">return</span> deferred.<span class="pl-c1">promise</span>;
+                }
+            };
+
+            <span class="pl-k">return</span> factory;
+        }
+    };</pre></div>
+
+<p>N'oubliez pas de l'inscrire à AngularJS dans le fichier <em>index.html</em> :</p>
+
+<div class="highlight highlight-javascript"><pre>    app.<span class="pl-c1">factory</span>(<span class="pl-s"><span class="pl-pds">'</span>BlogFactory<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>$http<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>$q<span class="pl-pds">'</span></span>, BlogFactory.<span class="pl-c1">factory</span>]);</pre></div>
+
+<h3>
+<a id="création-dune-route" class="anchor" href="#cr%C3%A9ation-dune-route" aria-hidden="true"><span class="octicon octicon-link"></span></a>Création d'une route</h3>
+
+<p>Ouvrez le fichier <em>rooter/rooter.js</em> et ajoutez des routes à la suite des autres <em>when</em> comme ceci :</p>
+
+<div class="highlight highlight-javascript"><pre>    .<span class="pl-c1">state</span>(BlogController.<span class="pl-c1">blog</span>.<span class="pl-c1">routeName</span>, BlogController.<span class="pl-c1">blog</span>)</pre></div>
+
+<p>Pour la gestion de route, vous n'avez plus besoin de vous souvenir des URL, vous appelez juste le nom que vous avez indiqué dans <em>routeName</em> :</p>
+
+<div class="highlight highlight-html"><pre>    &lt;<span class="pl-ent">a</span> <span class="pl-e">ui-sref</span>=<span class="pl-s"><span class="pl-pds">"</span>blog<span class="pl-pds">"</span></span>&gt;Lire mon blog&lt;/<span class="pl-ent">a</span>&gt;</pre></div>
+
+<p>Pour les routes avec des paramètres, regardez la vue <em>Article/articles.html</em>.</p>
+
+<h1>
+<a id="compilation" class="anchor" href="#compilation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compilation</h1>
+
+<p>Normalement, j'ai essayé d'utiliser au maximum la syntaxe décrite dans la <a href="https://docs.angularjs.org/api">documentation</a> d'AngularJS permettant une compilation des fichiers JS sans risquer de problème.</p>
+
+<p>Amusez-vous bien avec et en cas de soucis, contactez-moi !</p>
+
+<h1>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h1>
+
+<ul>
+<li>Modification du système de route.
+
+<ul>
+<li>
+<em>angularjs/ngRoute</em> vers <em>angular-ui/ui.router</em>
+</li>
+</ul>
+</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/babeuloula/AngularMVC/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/babeuloula/AngularMVC/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/babeuloula/AngularMVC"></a> is maintained by <a href="https://github.com/babeuloula">babeuloula</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-66612324-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
